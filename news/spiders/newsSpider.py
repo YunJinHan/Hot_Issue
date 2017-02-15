@@ -21,5 +21,4 @@ class NewsSpider(scrapy.Spider):
             item = NewsItem()
             item['category'] = category
             item['title'] = sel.xpath('a/text()').extract()[0]
-            print item['category'] + " : " + item['title']
             yield item
