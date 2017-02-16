@@ -19,7 +19,7 @@ Crontab Setting
 -------------
 1. 터미널에서 EDITOR=vim crontab -e 실행
 2. 다음 Code 작성
-<pre><code>
+<pre><codei>
 MAILTO = '' // 해당 예약어 수행 결과를 받아보려면 해당 계정이름을 적어줌
 PATH=/usr/local/bin
 LC_CTYPE="utf-8" // 한글 인코딩 문제
