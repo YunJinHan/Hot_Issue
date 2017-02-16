@@ -25,6 +25,7 @@ PATH=/usr/local/bin
 LC_CTYPE="utf-8" // 한글 인코딩 문제
 * * * * * * cd crawling folder 절대 경로 && scrapy crawl news ( 크롤링 )
 * * * * * * cd crawling folder 절대 경로 && python init.py ( word cloud 생성 )
+
 // 매 분 실행. 앞의 * 로 crontab 실행 빈도를 결정해준다.
 </code></pre>
 3. 완료
