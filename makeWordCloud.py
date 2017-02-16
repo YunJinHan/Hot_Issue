@@ -17,9 +17,9 @@ class MakeWordCloud:
             nouns = self.nlp.nouns(self.word_list.get(data))
             nouns = [x for x in nouns if len(x) != 1]
             count = Counter(nouns)
-            tags = count.most_common(50)
-            taglist = pytagcloud.make_tags(tags, minsize=20,maxsize=80)
+            tags = count.most_common(40)
+            taglist = pytagcloud.make_tags(tags, minsize=15,maxsize=50)
 
             fileName = 'wordcloud' + str(self.count) +'.jpg'
-            pytagcloud.create_tag_image(taglist, fileName, size=(800, 800), fontname='korean',layout=LAYOUT_HORIZONTAL, rectangular=True)
+            pytagcloud.create_tag_image(taglist, fileName, size=(600, 600), fontname='korean', rectangular=True)
             self.count += 1
