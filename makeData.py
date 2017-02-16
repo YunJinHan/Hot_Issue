@@ -6,7 +6,7 @@ import MySQLdb
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-class makeData:
+class MakeData:
 
     def __init__(self):
         self.host = '127.0.0.1'
@@ -34,4 +34,5 @@ class makeData:
                 for tmp in data_rows:
                     data += tmp[0]
                 data_list[i] = data
+        self.connection.close()
         return data_list
