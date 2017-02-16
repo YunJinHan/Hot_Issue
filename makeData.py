@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import re
 import MySQLdb
 
 reload(sys)
@@ -17,6 +18,17 @@ class MakeData:
         self.cursor = self.connection.cursor()
         self.category_list = []
 
+    def clean_text(self,text):
+        cleaned_text = re.sub('[a-zA-Z]','',text)
+        cleaned_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"“‘…’”]','',cleaned_text)
+        return cleaned_text
+
+    def isSpace(self,text):
+        isSpace_text = re.sub(' ','',text)
+        if len(isSpace_text) == 0 :
+            return False
+        return True
+
     def get_Category_List(self):
         self.cursor.execute("SELECT DISTINCT(category) FROM article")
         data_rows = self.cursor.fetchall()
@@ -32,7 +44,10 @@ class MakeData:
                 self.cursor.execute("SELECT title FROM article WHERE category = %s",[i])
                 data_rows = self.cursor.fetchall()
                 for tmp in data_rows:
-                    data += tmp[0]
+                    text = ''.join(tmp[0])
+                    text2 = self.clean_text(text);
+                    if self.isSpace(text2):
+                        data += text2
                 data_list[i] = data
         self.connection.close()
         return data_list

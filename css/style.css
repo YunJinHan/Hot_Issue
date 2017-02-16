@@ -2,10 +2,16 @@
 
 html, body {
     width: 100%;
-    height: 100%;
+    height: 95%;
     background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
     font-family: 'Nanum Pen Script', serif;
     font-size: 15pt;
+}
+
+td {
+    text-align: center;
 }
 
 .header {
@@ -35,6 +41,7 @@ html, body {
 #menu * {
     font-size: 20pt;
     opacity: 0.9;
+    box-shadow: 5px 5px 5px #000000;
 }
 
 .main {
@@ -42,12 +49,12 @@ html, body {
     margin-top: 0;
     padding-top: 0;
     width: 85%;
-    height: 90%;
+    height: 80%;
 }
 
 .wordcloud {
     float: left;
-    width: 59%;
+    width: 49%;
     height: 100%;
     margin: auto;
     margin-top: 10%;
@@ -57,15 +64,16 @@ html, body {
 
 .wordcloud > img {
     width: 100%;
-    height: 100%;
-    border-radius: 80px;
+    height: 95%;
+    border-radius: 30px;
+    box-shadow: 5px 5px 5px #000000;
     opacity: 0.85;
     overflow: auto;
 }
 
 .table {
     float: right;
-    width: 39%;
+    width: 49%;
     height: 100%;
     margin: auto;
     margin-left: 1%;
@@ -73,7 +81,7 @@ html, body {
 }
 
 #table {
-    height: 100%;
+    height: 90%;
     margin: auto;
     margin-bottom: 0;
 }
@@ -93,4 +101,14 @@ html, body {
 
 .push_button {
     background-color: #aca9cb !important;
+}
+
+.panel-body, .panel, #table {
+    overflow: auto;
+}
+
+.dataTables_info, .dataTables_filter, .dataTables_paginate, .paging_simple_numbers, #dataTables-example_filter{
+    padding: 0;
+    margin: 0;
+    display: none !important;
 }
