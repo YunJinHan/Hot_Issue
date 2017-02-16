@@ -10,6 +10,8 @@ import sys
 import re
 import MySQLdb
 import hashlib
+from konlpy.tag import Twitter
+from collections import Counter
 from scrapy.exceptions import DropItem
 from scrapy.http import Request
 
@@ -22,20 +24,30 @@ class NewsPipeline(object):
     user = 'root'
     password = '0000'
     db = 'news'
+    data = ' '
 
     def __init__(self):
 		self.connection = MySQLdb.connect(self.host, self.user, self.password, self.db, charset="utf8", use_unicode=True)
 		self.cursor = self.connection.cursor()
 		self.cursor.execute("DELETE FROM article")
 
-    def clean_text(text):
+    def clean_text(self,text):
         cleaned_text = re.sub('[a-zA-Z]','',text)
-        cleaned_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]','',cleaned_text)
+        cleaned_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"“‘…’”]','',cleaned_text)
         return cleaned_text
+
+    def isSpace(self,text):
+        isSpace_text = re.sub(' ','',text)
+        if len(isSpace_text) == 0 :
+            return True
+        return False
 
     def process_item(self, item, spider):
         try:
-            item['title'] = clean_text(itme['title'])
+            item['title'] = self.clean_text(item['title'])
+            if self.isSpace(item['title']):
+                return item
+            self.data += item['title'] + ' '
             self.cursor.execute("INSERT INTO article VALUES (%s, %s)",(item['category'],item['title']))
             self.connection.commit()
         except MySQLdb.Error, e:
