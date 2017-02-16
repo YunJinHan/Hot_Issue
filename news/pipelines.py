@@ -7,6 +7,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import sys
+import re
 import MySQLdb
 import hashlib
 from scrapy.exceptions import DropItem
@@ -27,8 +28,14 @@ class NewsPipeline(object):
 		self.cursor = self.connection.cursor()
 		self.cursor.execute("DELETE FROM article")
 
+    def clean_text(text):
+        cleaned_text = re.sub('[a-zA-Z]','',text)
+        cleaned_text = re.sub('[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]','',cleaned_text)
+        return cleaned_text
+
     def process_item(self, item, spider):
         try:
+            item['title'] = clean_text(itme['title'])
             self.cursor.execute("INSERT INTO article VALUES (%s, %s)",(item['category'],item['title']))
             self.connection.commit()
         except MySQLdb.Error, e:
