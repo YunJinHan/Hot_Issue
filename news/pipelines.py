@@ -10,8 +10,6 @@ import sys
 import re
 import MySQLdb
 import hashlib
-from konlpy.tag import Twitter
-from collections import Counter
 from scrapy.exceptions import DropItem
 from scrapy.http import Request
 
@@ -24,7 +22,6 @@ class NewsPipeline(object):
     user = 'root'
     password = '0000'
     db = 'news'
-    data = ' '
 
     def __init__(self):
 		self.connection = MySQLdb.connect(self.host, self.user, self.password, self.db, charset="utf8", use_unicode=True)
@@ -47,9 +44,9 @@ class NewsPipeline(object):
             item['title'] = self.clean_text(item['title'])
             if self.isSpace(item['title']):
                 return item
-            self.data += item['title'] + ' '
-            self.cursor.execute("INSERT INTO article VALUES (%s, %s)",(item['category'],item['title']))
+            self.cursor.execute("INSERT INTO article VALUES (%s, %s, %s)",(item['category'],item['title'],item['url']))
             self.connection.commit()
         except MySQLdb.Error, e:
             print "Error %d: %s" % (e.args[0], e.args[1])
+
         return item

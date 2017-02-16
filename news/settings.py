@@ -14,6 +14,7 @@ BOT_NAME = 'news'
 SPIDER_MODULES = ['news.spiders']
 NEWSPIDER_MODULE = 'news.spiders'
 ITEM_PIPELINES = ['news.pipelines.NewsPipeline']
+#,'news.pipelines.NewsAnalysisPipeline']
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'news (+http://www.yourdomain.com)'
@@ -66,6 +67,7 @@ ROBOTSTXT_OBEY = False
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'news.pipelines.NewsPipeline': 300,
+    #'news.pipelines.NewsAnalysisPipeline': 800
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
