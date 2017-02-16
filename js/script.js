@@ -126,7 +126,7 @@ function showNews_JSON(data,category_name) {
     for (var i = 0; i < data.length; i ++) {
         var tmp_tr = "<tr>";
         tmp_tr += "<td>" + category_name + "</td>";
-        tmp_tr += "<td><a href=\"" + data[i]['url'] + "\">" + data[i]['title'] + "</a></td>";
+        tmp_tr += "<td><a href=\"" + data[i]['url'] + "\" target=\"_blank\">" + data[i]['title'] + "</a></td>";
         tmp_tr += "</tr>";
         $("#news_table").append(tmp_tr);
     }
